@@ -1,0 +1,17 @@
+{
+  "name": "lambda-crawlee-screenshot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@sparticuz/chromium": "^122.0.0",
+    "crawlee": "^3.8.1",
+    "puppeteer": "^22.4.1"
+  }
+}
