@@ -7,6 +7,7 @@ export const handler = async (event, context) => {
 
   const { queryStringParameters } = event;
   let urls = [];
+  let result = null;
 
   if (!queryStringParameters) {
     return {
@@ -21,10 +22,7 @@ export const handler = async (event, context) => {
   // # add url
   urls.push(queryStringParameters["url"]);
 
-  // get url in query parameters
-  // save photo into s3 bucket with public acl enabled
-  // maybe have like an metadata like json{url: photo...}
-  // api should be rate limited per user in headers 'x-rate-limit'
+  // TODO: add rate limit to api request
 
   const crawler = new PuppeteerCrawler(
     {
@@ -46,7 +44,12 @@ export const handler = async (event, context) => {
           captureBeyondViewport: false,
         });
 
-        console.log('screenshot', screenshot);
+        // # convert into data:image base64
+        const b64Data = screenshot.toString('base64');
+        const dataURI = `data:image/jpeg;base64,${b64Data}`;
+
+        // # update result 
+        result = dataURI;
       },
       launchContext: {
         launchOptions: {
@@ -67,7 +70,7 @@ export const handler = async (event, context) => {
     isBase64Encoded: false,
     statusCode: 200,
     body: JSON.stringify({
-      data: await crawler.getData(),
+      data: result,
     }),
   };
 };

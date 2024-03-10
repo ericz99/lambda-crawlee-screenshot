@@ -18,7 +18,7 @@
         - Enable lambda proxy integration
         - Add query string: url and make it required
     - Deploy your API, set to whatever stage name you want.
-    - You can now test our your API, using your API link that was successfully generated and add the querystring `https://<your-api>?url=<someurl>`
+    - You can now test out your API, using your API link that was generated and add the querystring `https://<your-api>?url=<someurl>`
 
 ## License
 
